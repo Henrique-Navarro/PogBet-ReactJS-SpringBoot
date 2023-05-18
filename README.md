@@ -10,4 +10,3 @@ Tecnologias usadas:
   - React JS
   - Postman
   - Mysql Workbench
-  - VS code
