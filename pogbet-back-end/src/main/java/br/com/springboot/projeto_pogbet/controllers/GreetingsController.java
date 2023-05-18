@@ -104,7 +104,8 @@ public class GreetingsController {
     	return new ResponseEntity<List<Usuario>>(usuario, HttpStatus.OK);
     }
     
-    @Controller
+    //@Controller
+    @RequestMapping		//foi preciso adicionar para não ocorrer erro ao entrar na index.html
     public class MyController {
 
         @GetMapping("index.html")
