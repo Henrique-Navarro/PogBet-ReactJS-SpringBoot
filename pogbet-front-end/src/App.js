@@ -1,25 +1,58 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
 import './App.css';
+import PogBet from "./img/Logo.svg"
 
-function App() {
+function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // aqui você pode implementar a lógica de autenticação
+    console.log("Nome de Usuario: ", username);
+    console.log("Senha: ", password);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="login-container">
+      <img src ={PogBet} alt="Logo do site" title="PogBet"/>
+      <div><h2>Login</h2></div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="Nome de usuario">Nome de Usuário</label>
+          <input
+            type="text"
+            id="Nome de usuario"
+            value={username}
+            onChange={handleUsernameChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </div>
+        <button type="submit">Login</button>
+
+      </form>
     </div>
+    
   );
 }
 
-export default App;
+export default Login;
