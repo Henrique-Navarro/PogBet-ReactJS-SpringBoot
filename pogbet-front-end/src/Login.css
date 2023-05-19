@@ -54,12 +54,16 @@ input[type="password"] {
 
 button[type="submit"] {
   display: block;
-  width: 100%;
+  width: 105%;
   padding: 10px;
-  font-size: 16px;
+  font-size: 20px;
   border-radius: 5px;
   border: none;
   background-color: darkred;
   color: #fff;
 
+}
+
+h5{
+color: darkred;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './App.css';
+import './Login.css';
 import PogBet from "./img/Logo.svg"
 
 function Login() {
