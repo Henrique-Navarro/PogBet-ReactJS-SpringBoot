@@ -17,20 +17,21 @@ public class ApostaController {
     private final ApostaService apostaService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Aposta> save(@RequestBody @Valid Aposta aposta) {
-        return new ResponseEntity<>(apostaService.save(aposta), HttpStatus.CREATED);
+    public ResponseEntity<String> save(@RequestBody @Valid Aposta aposta) {
+        Aposta novaAposta = apostaService.save( aposta);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Aposta Adicionada com Sucesso!\n");
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody Aposta aposta) {
+    public ResponseEntity<String> replace(@RequestBody Aposta aposta) {
         apostaService.replace(aposta);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.OK).body("Aposta Atualizada com Sucesso!\n");
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         apostaService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(HttpStatus.OK).body("Aposta Deletada com Sucesso!\n");
     }
 
     @GetMapping(path = "/list")

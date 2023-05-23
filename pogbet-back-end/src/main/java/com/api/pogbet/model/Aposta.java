@@ -21,7 +21,7 @@ public class Aposta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NotEmpty
     private String categoria;
 
@@ -33,4 +33,7 @@ public class Aposta {
 
     @NotEmpty
     private String data;
+
+    @NotNull
+    private Long userID;
 }
