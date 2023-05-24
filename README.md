@@ -9,4 +9,4 @@ Tecnologias usadas:
   - Spring Boot
   - React JS
   - Postman
-  - Mysql Workbench
+  - Mysql

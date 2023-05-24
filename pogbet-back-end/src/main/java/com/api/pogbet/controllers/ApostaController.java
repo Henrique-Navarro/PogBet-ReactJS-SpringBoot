@@ -18,7 +18,7 @@ public class ApostaController {
 
     @PostMapping(path = "/add")
     public ResponseEntity<String> save(@RequestBody @Valid Aposta aposta) {
-        Aposta novaAposta = apostaService.save( aposta);
+        Aposta novaAposta = apostaService.save(aposta);
         return ResponseEntity.status(HttpStatus.CREATED).body("Aposta Adicionada com Sucesso!\n");
     }
 
@@ -34,8 +34,33 @@ public class ApostaController {
         return ResponseEntity.status(HttpStatus.OK).body("Aposta Deletada com Sucesso!\n");
     }
 
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Aposta> getById(@PathVariable Long id) {
+        return new ResponseEntity<>(apostaService.findById(id), HttpStatus.OK);
+    }
+
     @GetMapping(path = "/list")
     public ResponseEntity<List<Aposta>> getAll() {
         return new ResponseEntity<>(apostaService.listAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/list/categoria/{categoria}")
+    public ResponseEntity<List<Aposta>> getAllByCategoria(@PathVariable String categoria) {
+        return new ResponseEntity<>(apostaService.findByCategoria(categoria), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/list/valor/{valor}")
+    public ResponseEntity<List<Aposta>> getAllByValor(@PathVariable Float valor) {
+        return new ResponseEntity<>(apostaService.findByValor(valor), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/list/ganhou/{ganhou}")
+    public ResponseEntity<List<Aposta>> getAllByGanhou(@PathVariable boolean ganhou) {
+        return new ResponseEntity<>(apostaService.findByGanhou(ganhou), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/list/data/{data}")
+    public ResponseEntity<List<Aposta>> getAllByData(@PathVariable String data) {
+        return new ResponseEntity<>(apostaService.findByData(data), HttpStatus.OK);
     }
 }
