@@ -7,20 +7,23 @@ nav{
 
   .navbar-container {
     display: flex;
-    align-items: center;
+    align-items:center;
     justify-content: space-between;
     padding: 5px;
+    
   }
   .logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 20vh; /* Ajuste conforme necessário */
   }
   
   .menu {
-    display: flex;
+    display:inline-flex;
     list-style: none;
     padding: 0;
+
   }
   
   .menu li {
@@ -34,8 +37,7 @@ nav{
   }
 
   img{
-   
-    width: 200px;
-    height: 200px;
+    max-width: 120%;
+    max-height: 120%;
     
   }
