@@ -1,0 +1,21 @@
+body{
+    background-color: black;
+}
+nav{
+    background-color: darkred;
+}
+
+.texto {
+    display: inline-block;
+  }
+  
+
+.lista {
+    display: flex;
+    list-style: none;
+    padding:2%;
+  }
+  .lista li {
+    display: inline-block;
+    margin-right: 100px; /* Espaçamento entre os itens */
+  }
