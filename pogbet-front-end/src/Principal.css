@@ -5,17 +5,37 @@ nav{
     background-color: darkred;
 }
 
-.texto {
-    display: inline-block;
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+  }
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
-
-.lista {
+  .menu {
     display: flex;
     list-style: none;
-    padding:2%;
+    padding: 0;
   }
-  .lista li {
+  
+  .menu li {
+    margin-right: 10px;
+  }
+  
+  .texto {
     display: inline-block;
-    margin-right: 100px; /* Espaçamento entre os itens */
+    color: black;
+    margin-right: 70px;
+  }
+
+  img{
+   
+    width: 200px;
+    height: 200px;
+    
   }
