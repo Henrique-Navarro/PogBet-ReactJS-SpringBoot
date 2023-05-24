@@ -1,48 +1,52 @@
 body {
-    background-color: black;
-  }
-  img{
-    position: relative;
-    top: -30px;
-    width: 300px;
-    max-height: 300px;
-    align-items: center;
-  
-  }
-  .cadastro-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: center; /* alinha o conteÃºdo ao centro */
-    margin-top: 15px;
-  }
-  .login-container h1 {
-    margin-bottom: 20px;
-  }
+  background-color: black;
+}
 
-  h1{
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: 0.3px;
-    color: darkred;
-    font-size: 40px;
-  }
+img {
+  position: relative;
+  top: -30px;
+  width: 300px;
+  max-height: 300px;
+  align-items: center;
 
-  .form-group {
-    margin-bottom: 20px;
-    text-align: left;
-    color: #f0f0f0;
-  }
+}
 
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
+.cadastro-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  /* alinha o conteÃºdo ao centro */
+  margin-top: 15px;
+}
 
-  
+.login-container h1 {
+  margin-bottom: 20px;
+}
+
+h1 {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 0.3px;
+  color: darkred;
+  font-size: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  color: #f0f0f0;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+
 input[type="text"],
 input[type="email"],
 input[type="date"],
@@ -57,14 +61,12 @@ input[type="password"] {
 }
 
 button[type="submit"] {
-    display: block;
-    width: 105%;
-    padding: 10px;
-    font-size: 20px;
-    border-radius: 5px;
-    border:none;
-    background-color: darkred;
-    color: #fff;
-  }
-
- 
+  display: block;
+  width: 105%;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: darkred;
+  color: #fff;
+}
