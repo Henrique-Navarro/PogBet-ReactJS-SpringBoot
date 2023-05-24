@@ -7,7 +7,9 @@ function Cadastro() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [dataNascimento, setDataNascimento] = useState('');
-  
+
+    fetch('http://localhost:8080/aposta/list').then(apostas=>apostas.json()).then(retorno=>console.log(retorno))
+
     const handleSubmit = (event) => {
       event.preventDefault();
       console.log('Nome:', nome);
