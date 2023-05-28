@@ -43,6 +43,15 @@ class ApostaRepositoryTest {
     }
 
     @Test
+    @DisplayName("Criar e salvar aposta lança uma Exception com algum atributo faltando")
+    public void save_ThrowsException_WhenSomeAttributeIsEmpty() {
+        Aposta aposta = new Aposta();
+
+        Assertions.assertThatExceptionOfType(Exception.class)
+                .isThrownBy(() -> this.apostaRepository.save(aposta));
+    }
+
+    @Test
     @DisplayName("Atualizar aposta")
     public void update_UpdateAposta_WhenExists() {
         Aposta apostaToBeSaved = createAposta();

@@ -22,6 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
+@DisplayName("Testes para ApostaController")
 class ApostaControllerTest {
     @InjectMocks                                    //CLASSE A SER TESTADA
     private ApostaController apostaController;
