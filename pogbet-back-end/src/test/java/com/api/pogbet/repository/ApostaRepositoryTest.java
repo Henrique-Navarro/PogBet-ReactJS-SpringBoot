@@ -240,5 +240,4 @@ class ApostaRepositoryTest {
         long apostaId = nextApostaId++;
         return new Aposta(apostaId, "categoria", 20.0F, true, "hoje", 1L);
     }
-
 }

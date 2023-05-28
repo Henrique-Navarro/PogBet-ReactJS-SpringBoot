@@ -53,4 +53,5 @@ public class ApostaService {
     public List<Aposta> findByData(String data) {
         return apostaRepository.findByData(data);
     }
+
 }
