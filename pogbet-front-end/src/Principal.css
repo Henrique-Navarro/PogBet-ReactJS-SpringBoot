@@ -1,0 +1,43 @@
+body{
+    background-color: black;
+}
+nav{
+    background-color: darkred;
+}
+
+  .navbar-container {
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 5px;
+    
+  }
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh; /* Ajuste conforme necessário */
+  }
+  
+  .menu {
+    display:inline-flex;
+    list-style: none;
+    padding: 0;
+
+  }
+  
+  .menu li {
+    margin-right: 10px;
+  }
+  
+  .texto {
+    display: inline-block;
+    color: black;
+    margin-right: 70px;
+  }
+
+  img{
+    max-width: 120%;
+    max-height: 120%;
+    
+  }
