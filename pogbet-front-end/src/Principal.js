@@ -1,29 +1,33 @@
 import React from 'react';
-import './Principal.css'
-import PogBet from "./img/Logo.svg"
-
-class Navbar extends React.Component {
-  render() {
-    return (
+import './Principal.css';
+import Logo from "./img/Logo.svg"
+import Crash from "./img/Crash.svg"
+import Dice from "./img/Dice.svg"
+import Campo from "./img/Campo Minado.svg"
+function App() {
+  return (
+    <div>
       <nav>
-        <diV className="navbar-container">
-           <div className="logo-container">
-            <img src ={PogBet} alt="Logo do site" title="PogBet"/></div>
-        < ul className="menu">
-          <li>
-          <span className="texto">Jogos</span>
-          </li>
-          <li>
-          <span className="texto">Criadores</span>
-          </li>
-          <li>
-          <span className="texto">Login</span>
-          </li>
-        </ul></diV>
-        
+        <div className="logo">
+          {<img src ={Logo} alt="Logo do site" title="PogBet"/>}
+        </div>
+        <div>
+          <a href="#">Jogos</a>
+          <a href="#">Sobre</a>
+        </div>
+        <div>
+          <button>Login</button>
+          <button>Cadastro</button>
+        </div>
       </nav>
-    );
-  }
+
+      <div className="image-section">
+        <img src ={Crash} alt="imagem do Crash" title="Crash"/>
+        <img src ={Dice} alt="imagem do Dice" title="Dice"/>
+        <img src ={Campo} alt="imagem do Campo Minado" title="Campo Minado"/>
+      </div>
+    </div>
+  );
 }
 
-export default Navbar;
+export default App;
