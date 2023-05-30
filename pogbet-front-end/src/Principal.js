@@ -29,8 +29,6 @@ function App() {
         <img src ={Campo} alt="imagem do Campo Minado" title="Campo Minado"/>
       </div>
       <div className="parteBaixo">
-        
-      </div>
       <div className="sobre">
       <img className='jooj' src ={Jooj} alt="imagem do João" title="João Pedro Xavier Martins"/>
         <h1 className='texto'>Aluno: João Pedro Xavier Martins<br></br>
@@ -53,6 +51,9 @@ function App() {
             Meios de Contato:@Brenin </h1>
       </div>
        <div className='joia'> <img className='demonioJoia' src ={Joia} alt="imagem do Diabo do Joia" title="Joia"/></div>
+      </div>
+
+     
     </div>
   );
 }
