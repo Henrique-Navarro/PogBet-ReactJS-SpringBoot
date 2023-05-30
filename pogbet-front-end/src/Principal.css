@@ -32,16 +32,55 @@ text-decoration: none;
 }
 
 img{
-  max-width: 120%;
-  max-height: 120%;
+  width: 350px;
+  max-height: 350px;
+  align-items: center;
+  margin-top: 150px;
   
 }
 button{
   background-color: darkgoldenrod;
   color: black;
-  font-size: 20px;
+  font-size: 25px;
   border-radius: 5px;
   margin-left: 10px;
   font-family: 'Times New Roman', Times, serif;
- 
 }
+.sobre{
+  color: wheat;
+  font-size: 12px;
+  font-family: 'Times New Roman', Times, serif;
+  display: flex;
+  align-items: center;
+  height: auto;
+  background-color: darkgoldenrod;
+
+}
+.sobre1{
+  color: wheat;
+  font-size: 12px;
+  font-family: 'Times New Roman', Times, serif;
+  display: flex;
+  align-items: center;
+  margin-top: -120px;
+  background-color: darkgoldenrod;
+}
+.joia{
+  margin-left: 50%;
+  margin-top: -800px;
+  
+}
+.demonioJoia{
+  width: 550px;
+  max-height: 550px;
+}
+.jooj{
+  width: 210px; /* Define a largura da imagem */
+  height: auto; /* Mantém a proporção da imagem */
+  margin-left: 5%;
+}
+
+h1{
+  margin-bottom: -10%;
+}
+
