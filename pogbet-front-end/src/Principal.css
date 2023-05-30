@@ -36,3 +36,12 @@ img{
   max-height: 120%;
   
 }
+button{
+  background-color: darkgoldenrod;
+  color: black;
+  font-size: 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-family: 'Times New Roman', Times, serif;
+ 
+}

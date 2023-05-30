@@ -15,7 +15,7 @@ function App() {
           <a href="#">Jogos</a>
           <a href="#">Sobre</a>
         </div>
-        <div>
+        <div className="button">
           <button>Login</button>
           <button>Cadastro</button>
         </div>
