@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import './Login.css';
-import PogBet from "./img/Logo.svg"
+import "./Login.css";
+import PogBet from "../../img/Logo.svg";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -14,18 +14,18 @@ function Login() {
     setPassword(event.target.value);
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    // aqui você pode implementar a lógica de autenticação
     console.log("Nome de Usuario: ", username);
     console.log("Senha: ", password);
   };
 
   return (
     <div className="login-container">
-      <img src ={PogBet} alt="Logo do site" title="PogBet"/>
-      <div><h2>Login</h2></div>
+      <div>
+        <h2>Login</h2>
+      </div>
+      <img src={PogBet} alt="Logo do site" title="PogBet" />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="Nome de usuario">Nome de Usuário</label>
@@ -48,10 +48,8 @@ function Login() {
           />
         </div>
         <button type="submit">Login</button>
-
       </form>
     </div>
-    
   );
 }
 

@@ -1,0 +1,28 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 4px;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cell.revealed {
+    background-color: #fff;
+}
+
+.cell:hover {
+    background-color: #ddd;
+}

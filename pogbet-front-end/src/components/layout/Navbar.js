@@ -1,22 +1,26 @@
+import { Link } from "react-router-dom";
 import Logo from "../../img/Logo.svg";
 
 function Navbar() {
   return (
-    <>
-      <nav>
-        <div>
-          <a href="#">Jogos</a>
-          <a href="#">Sobre</a>
-        </div>
+    <nav>
+      <div>
+        <Link to="/aposta/list">Apostas</Link>
+        <Link to="/sobre">Sobre</Link>
+        <Link to="/contato">Contato</Link>
+      </div>
+
+      <Link to="/">
         <div className="logo">
           {<img src={Logo} alt="Logo do site" title="PogBet" />}
         </div>
-        <div className="button">
-          <button>Login</button>
-          <button>Cadastro</button>
-        </div>
-      </nav>
-    </>
+      </Link>
+
+      <div>
+        <Link to="/login">Login</Link>
+        <Link to="/cadastro">Cadastro</Link>
+      </div>
+    </nav>
   );
 }
 
