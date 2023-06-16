@@ -17,7 +17,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-        maven-version: '3.8.4' 
+        maven-version: '3.10.1' 
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file ${{ github.workspace }}/pogbet-back-end/pom.xml
