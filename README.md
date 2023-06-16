@@ -15,4 +15,3 @@ Sobre a Pog Bet:
 
 Testes:
 
-https://img.shields.io/github/actions/workflow/status/Henrique-Navarro/PogBet-ReactJS-SpringBoot/maven
