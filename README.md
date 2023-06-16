@@ -10,3 +10,5 @@ Tecnologias usadas:
   - React JS
   - Postman
   - Mysql
+
+Sobre a Pog Bet
