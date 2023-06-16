@@ -11,7 +11,7 @@ import lombok.*;
 @Entity
 @Builder
 public class User {
-    //ATRIBUTOS DA TABELA (USUARIO) NO BANCO DE DADOS
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
