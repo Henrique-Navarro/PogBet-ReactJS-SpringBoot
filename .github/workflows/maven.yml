@@ -12,11 +12,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-    - name: Set up JDK 11
+    - name: Set up JDK 11 and Maven
       uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'temurin'
+        maven-version: '3.8.4' 
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file ${{ github.workspace }}/pogbet-back-end/pom.xml
