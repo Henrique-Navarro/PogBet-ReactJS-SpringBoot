@@ -12,10 +12,6 @@ public class UserService {
     //CLASSE RESPONSÁVEL PELAS REGRAS DE NEGÓCIO
     private final UserRepository userRepository;
 
-    public User user(User user) {
-        return userRepository.save(user);
-    }
-
     public void replace(User user) {
         User savedUser = findById(user.getId());
         user.setId(savedUser.getId());

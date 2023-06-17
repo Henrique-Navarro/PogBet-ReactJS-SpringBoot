@@ -1,76 +1,101 @@
 import React, { useState } from "react";
-import PogBet from "../../img/Logo.svg";
 import "./Cadastro.css";
+import Input from "../form/Input";
+import Center from "../layout/Center";
+import { useNavigate } from "react-router-dom";
 
 function Cadastro() {
-  const [nome, setNome] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
+  const [cpf, setCpf] = useState("");
 
-  //fetch('http://localhost:8080/aposta/list').then(apostas=>apostas.json()).then(retorno=>console.log(retorno))
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Nome:", nome);
-    console.log("Email:", email);
-    console.log("Senha:", senha);
-    console.log("Data de Nascimento:", dataNascimento);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const usuario = {
+      name,
+      email,
+      senha,
+      dataNascimento,
+      saldo: 0,
+      cpf,
+    };
+    console.log(usuario);
+
+    fetch("http://localhost:8080/novoUsuario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(usuario),
+    })
+      .then((resp) => resp.json())
+      .catch((err) => {
+        console.log(err);
+      });
+    navigate("/", {
+      state: { message: "Usuário criado com sucesso!" },
+    });
   };
-
   return (
-    <div className="cadastro-container">
-      <img src={PogBet} alt="Logo do site" title="PogBet" />
-      <h1>Tela de Cadastro</h1>
+    <Center customClass="column">
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="label" htmlFor="nome">
-            Nome:
-          </label>
+        <label>
+          Nome:
           <input
             type="text"
-            id="nome"
-            value={nome}
-            onChange={(event) => setNome(event.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
-        </div>
-        <div className="form-group">
-          <label className="label" htmlFor="email">
-            Email:
-          </label>
+        </label>
+
+        <label>
+          Email:
           <input
             type="email"
-            id="email"
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
-        </div>
-        <div className="form-group">
-          <label className="label" htmlFor="dataNascimento">
-            Data de Nascimento:
-          </label>
-          <input
-            type="date"
-            id="dataNascimento"
-            value={dataNascimento}
-            onChange={(event) => setDataNascimento(event.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label className="label" htmlFor="senha">
-            Escolha uma Senha:
-          </label>
+        </label>
+
+        <label>
+          Senha:
           <input
             type="password"
-            id="senha"
             value={senha}
-            onChange={(event) => setSenha(event.target.value)}
+            onChange={(e) => setSenha(e.target.value)}
+            required
           />
-        </div>
+        </label>
 
+        <label>
+          Data de Nascimento:
+          <input
+            type="date"
+            value={dataNascimento}
+            onChange={(e) => setDataNascimento(e.target.value)}
+            required
+          />
+        </label>
+
+        <label>
+          CPF:
+          <input
+            type="text"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            required
+          />
+        </label>
+        <br></br>
         <button type="submit">Cadastrar</button>
       </form>
-    </div>
+    </Center>
   );
 }
 

@@ -20,8 +20,8 @@ public class UserController {
 
     @PostMapping(path = "/novoUsuario")
     public ResponseEntity<String> save(@RequestBody @Valid User user) {
-        User newUser = userService.save( user);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com Sucesso!\n");
+        User newUser = userService.save(user);
+        return ResponseEntity.status(HttpStatus.OK).body("Usuário criado com Sucesso!\n");
     }
     @PutMapping(path = "/attUser")
     public ResponseEntity<String> replace(@RequestBody User user) {
