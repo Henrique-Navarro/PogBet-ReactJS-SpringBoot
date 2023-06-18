@@ -22,22 +22,16 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div>
-        <h2>Login</h2>
-      </div>
-      <img src={PogBet} alt="Logo do site" title="PogBet" />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="Nome de usuario">Nome de Usuário</label>
-          <input
+          <label  htmlFor="Nome de usuario">Nome de Usuário</label>
+          <input className="nomeuse"
             type="text"
             id="Nome de usuario"
             value={username}
             onChange={handleUsernameChange}
             required
           />
-        </div>
-        <div className="form-group">
           <label htmlFor="password">Senha</label>
           <input
             type="password"
@@ -47,7 +41,7 @@ function Login() {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button className ="buttonlogin" type="submit">Login</button>
       </form>
     </div>
   );

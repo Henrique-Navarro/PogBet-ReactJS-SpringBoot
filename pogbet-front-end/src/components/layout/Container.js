@@ -17,10 +17,6 @@ function Container() {
           <img src={Campo} alt="imagem do Campo Minado" title="Campo Minado" />
         </Link>
       </div>
-      <div>
-        <h1>Faça Login</h1>
-        <Link to="login">Faça Login</Link>
-      </div>
     </>
   );
 }

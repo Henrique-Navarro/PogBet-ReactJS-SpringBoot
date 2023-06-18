@@ -1,6 +1,8 @@
 import Joia from "../../img/DiaboDoJoia.svg";
-import Jooj from "../../img/Jooj.svg";
-import Crash from "../../img/Crash.svg";
+import Jooj from "../../img/jooj.png";
+import Euros from "../../img/euros.png";
+import Bone from "../../img/boné.png";
+
 
 function Contato() {
   return (
@@ -16,33 +18,33 @@ function Contato() {
           <h1 className="texto">
             Aluno: João Pedro Xavier Martins<br></br>
             Perído: 7º <br></br>
-            Meios de Contato:@joaop47{" "}
+            Email:joao.xavier@alunos.ifsuldeminas.edu.br{" "}
           </h1>
         </div>
         <div className="sobre1">
           <img
             className="jooj"
-            src={Crash}
+            src={Euros}
             alt="imagem do Crash"
             title="Crash"
           />
           <h1 className="texto">
             Aluno: Henrique Navarro Morais<br></br>
             Perído: 7º <br></br>
-            Meios de Contato:@Morais{" "}
+            Email:henrique.navarro@alunos.ifsuldeminas.edu.br{" "}
           </h1>
         </div>
         <div className="sobre1">
           <img
             className="jooj"
-            src={Crash}
+            src={Bone}
             alt="imagem do Crash"
             title="Crash"
           />
           <h1 className="texto">
             Aluno: Breno Henrique Alves Freire Mizael<br></br>
             Perído: 7º <br></br>
-            Meios de Contato:@Brenin{" "}
+            Email:breno.freire@alunos.ifsuldeminas.edu.br{" "}
           </h1>
         </div>
         <div className="joia">

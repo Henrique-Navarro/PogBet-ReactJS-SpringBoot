@@ -9,18 +9,21 @@ nav{
   padding: 5px;
 }
 a{
-margin-Left: 30px;
+margin-Left: 35px;
 color: black;
 font-family: 'Times New Roman', Times, serif;
 font-size:xx-large;
 text-decoration: none;
+margin-right: 35px;
 }
 .logo{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 20vh; /* Ajuste conforme necessário */
+  margin-right: 70px;
 }
+
 .image-section img {
   width: 300px; /* Define a largura da imagem */
   height: auto; /* Mantém a proporção da imagem */
@@ -29,6 +32,8 @@ text-decoration: none;
   top: 30%;
   left: 12%;
   margin-bottom: 12%;
+  margin-right: 5px;
+  margin-left: 5px;
  
 }
 .parteBaixo{
@@ -41,7 +46,38 @@ img{
   margin-top: 150px;
   
 }
+.cadastro{
+  background-color: darkgoldenrod;
+  border-radius: 20px;
+  padding: 6px;
+  border: 3px solid black;
+}
+.sobrenav{
+  background-color: darkgoldenrod;
+  border-radius: 20px;
+  padding: 6px;
+  border: 3px solid black;
+}
+.aposta{
+  background-color: darkgoldenrod;
+  border-radius: 20px;
+  padding: 6px;
+  border: 3px solid black;
+}
 
+.contato{
+  background-color: darkgoldenrod;
+  border-radius: 20px;
+  padding: 6px;
+  border: 3px solid black;
+}
+
+.login{
+  background-color: darkgoldenrod;
+  border-radius: 20px;
+  padding: 6px;
+  border: 3px solid black;
+}
 .sobre{
   color: wheat;
   font-size: 12px;
@@ -62,8 +98,13 @@ img{
   background-color: darkgoldenrod;
 
 }
+h1{
+  margin-left: 10px;
+  margin-top: 105px;
+
+}
 .joia{
-  margin-left: 50%;
+  margin-left: 55%;
   margin-top: -800px;
   
 }
@@ -78,7 +119,4 @@ img{
   height: 200px;
 }
 
-h1{
-  margin-bottom: -10%;
-}
 

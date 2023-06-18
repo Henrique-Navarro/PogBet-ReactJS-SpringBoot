@@ -30,11 +30,13 @@ img{
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-top: 100px;
   text-align: left;
   color: #f0f0f0;
 }
-
+.nomeuse{
+  margin-bottom: 15px;
+}
 label {
   display: block;
   margin-bottom: 5px;
@@ -52,7 +54,7 @@ input[type="password"] {
   background-color: #f0f0f0;
 }
 
-button[type="submit"] {
+.buttonlogin[type="submit"] {
   display: block;
   width: 105%;
   padding: 10px;

@@ -1,5 +1,6 @@
 body {
-  background-color: rgb(245, 106, 106);
+  background-color: black;
+  color: #f0f0f0;
 }
 
 img {
@@ -24,16 +25,6 @@ img {
   margin-bottom: 20px;
 }
 
-h1 {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-top: 0.3px;
-  color: darkred;
-  font-size: 40px;
-}
-
 .form-group {
   margin-bottom: 20px;
   text-align: left;
@@ -45,7 +36,6 @@ label {
   margin-bottom: 5px;
   font-weight: bold;
 }
-
 
 input[type="text"],
 input[type="email"],
@@ -62,7 +52,7 @@ input[type="password"] {
 
 button[type="submit"] {
   display: block;
-  width: 105%;
+  width: 103%;
   padding: 10px;
   font-size: 20px;
   border-radius: 5px;
