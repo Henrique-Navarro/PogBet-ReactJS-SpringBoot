@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './PossibleBomb.css'
 export default class PossibleBomb extends React.Component {
 	constructor(props){
 		super(props);
@@ -13,11 +13,13 @@ export default class PossibleBomb extends React.Component {
 
 	render(){
 		let style = {
-			backgroundColor: this.props.wasClicked ? (this.props.isBomb ? "#e74c3c" : "#009871")  : "#464545"
+			backgroundColor: this.props.wasClicked ? (this.props.isBomb ? "purple" : "#009871")  : "darkgoldenrod"
+            
 		}
 
 		return (
 			<button className="square"
+            
 							id={this.props.id}
 							onClick={this.handleClick}
 							data-bomb={this.props.isBomb}
