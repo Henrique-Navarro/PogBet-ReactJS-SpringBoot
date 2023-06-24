@@ -77,7 +77,6 @@ export default class CampoMinado extends React.Component {
       aposta: 0
     };
 	}
-
 	getGeneratorId(cols){
 		return (function* idMaker(cols){
 			let x = 0;
