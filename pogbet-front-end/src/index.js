@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Container from "./components/layout/Container";
+import Aposta from "./components/pages/Aposta";
 import ListaApostas from "./components/pages/HistoricoApostas";
 import Sobre from "./components/pages/Sobre";
 import Login from "./components/pages/Login";
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "aposta/list",
         element: <ListaApostas />,
+      },
+      {
+        path: "aposta/:id",
+        element: <Aposta />,
       },
       {
         path: "sobre",

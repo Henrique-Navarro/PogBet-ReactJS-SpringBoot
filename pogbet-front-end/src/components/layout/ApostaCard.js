@@ -3,12 +3,10 @@ import { BsPencil, BsFillTrashFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 let vitoria = "";
 
-function ApostaCard({ id, categoria, valor, data, ganhou, handleRemove }) {
+function ApostaCard({ id, categoria,  data, ganhou,valor, handleRemove }) {
   const remove = (e) => {
     e.preventDefault();
     handleRemove(id);
-    if (ganhou == true) vitoria = "true";
-    else vitoria = "false";
   };
 
   return (

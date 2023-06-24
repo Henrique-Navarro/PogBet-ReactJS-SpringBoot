@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Cadastro.css";
-import Input from "../form/Input";
 import Center from "../layout/Center";
 import { useNavigate } from "react-router-dom";
 

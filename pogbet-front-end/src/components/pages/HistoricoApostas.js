@@ -6,26 +6,24 @@ function HistoricoApostas() {
   const [apostas, setApostas] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      fetch("http://localhost:8080/aposta/list", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    fetch("http://localhost:8080/aposta/list", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setApostas(data);
+        console.log(data);
+        //setRemoveLoading(true);
       })
-        .then((resp) => resp.json())
-        .then((data) => {
-          setApostas(data);
-          console.log(data);
-          //setRemoveLoading(true);
-        })
-        .catch((err) => console.log(err));
-    }, 1000);
+      .catch((err) => console.log(err));
   }, []);
 
   function removeAposta(id) {
     console.log("Id removido:" + id);
-    fetch(`http://localhost:8080/aposta?id=${id}`, {
+    fetch(`http://localhost:8080/aposta/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -44,10 +42,13 @@ function HistoricoApostas() {
         {apostas.length > 0 &&
           apostas.map((aposta) => (
             <ApostaCard
+              id={aposta.id}
               categoria={aposta.categoria}
-              valor={aposta.valor}
               data={aposta.data}
               ganhou={aposta.ganhou}
+              valor={aposta.valor}
+              key={aposta.id}
+              handleRemove={removeAposta}
             />
           ))}
       </Center>
