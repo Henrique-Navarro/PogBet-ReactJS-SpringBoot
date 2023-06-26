@@ -1,149 +1,281 @@
 import React, { useState } from 'react';
-import './CampoMinado.css';
+import Board from './Board';
+import Scores from './Scores';
 
-const generateEmptyBoard = (rows, columns) => {
-  const board = [];
-  for (let i = 0; i < rows; i++) {
-    board[i] = [];
-    for (let j = 0; j < columns; j++) {
-      board[i][j] = { value: 0, isRevealed: false };
-    }
-  }
-  return board;
-};
+import PossibleBomb from './PossibleBomb';
 
-const placeBombs = (board, numBombs) => {
-  const rows = board.length;
-  const columns = board[0].length;
-  let bombsPlaced = 0;
+export default class CampoMinado extends React.Component {
+	constructor(props){
+		super(props);
 
-  while (bombsPlaced < numBombs) {
-    const row = Math.floor(Math.random() * rows);
-    const column = Math.floor(Math.random() * columns);
+		this.MAX_SQUARES = Math.pow(10, 2);
+		this.LADO = Math.sqrt(this.MAX_SQUARES);
+		let idIterator = this.getGeneratorId(this.LADO);
 
-    if (board[row][column].value !== -1) {
-      board[row][column].value = -1;
-      bombsPlaced++;
-    }
-  }
-};
+		/*
+		[[bomb, bomb, bomb],
+		[bomb, bomb, bomb],
+		[bomb, bomb, bomb]]
+		 */
+		let arrayBombs = Array(this.LADO)
+			.fill(Array(this.LADO).fill())
+			.map(line => 
+				line.map(e => 
+					({
+						id: idIterator.next().value,
+						isBomb: Math.random() >= 0.80,
+						wasClicked: false,
+						displayValue: 0,
+						_equals: function(id){
+							// console.log('this', this.id);
+							return this.id.x === id.x && this.id.y === id.y;
+						}
+					})
+				)
+			);
 
-const countAdjacentBombs = (board, row, column) => {
-  const rows = board.length;
-  const columns = board[0].length;
-  let count = 0;
+		/* Mock de bombs */
+		// arrayBombs[0][2].isBomb = true;
+		// arrayBombs[1][2].isBomb = true;
+		// arrayBombs[3][2].isBomb = true;
+		// arrayBombs[1][1].isBomb = true;
 
-  for (let i = -1; i <= 1; i++) {
-    for (let j = -1; j <= 1; j++) {
-      const newRow = row + i;
-      const newColumn = column + j;
+		arrayBombs.map((line, lineIndex, matriz) => {
+				/** ATENÇÃO!!!!
+				 * Javascript não possui array bidimensiona.
+				 * Para solucionar isso, matriz é um array de arrays,
+				 * onde o primeiro array representam as linhas da minha matriz
+				 * e o segunto array, as "colunas" desta linha, que vem a ser um 
+				 * único objeto.
+				 * No plano carteziano (que é para onde minha função geradora de
+				 * id foi feita), buscamos primeiro a coluna X e depois a linha Y,
+				 * aqui, temos que buscar o contrário, primeiro nossa linha Y e 
+				 * depois nossa coluna X.
+				 *
+				 * Por este motivo, para simular um array bidimensional e lê-lo
+				 * com pares ordenados similares aos do plano carteziano, x e y
+				 * foram invertidos nos parâmetros desta função.
+				 */
+				matriz.incrementDisplay = function(y, x){
+					if (this[x] && this[x][y]){
+						// console.log("Incrementando", this[x][y].id)
+						if (!this[x][y].isBomb){
+							this[x][y].displayValue++;
+						}
+					}
+				}
 
-      if (
-        newRow >= 0 &&
-        newRow < rows &&
-        newColumn >= 0 &&
-        newColumn < columns &&
-        board[newRow][newColumn].value === -1
-      ) {
-        count++;
-      }
-    }
-  }
 
-  return count;
-};
+				line.map((bomb, i) => {
+					// console.log("Bomb =>", bomb);
 
-const revealEmptyCells = (board, row, column) => {
-  const rows = board.length;
-  const columns = board[0].length;
+					if (!bomb.isBomb)
+						return bomb;
 
-  const revealCell = (r, c) => {
-    if (
-      r >= 0 &&
-      r < rows &&
-      c >= 0 &&
-      c < columns &&
-      !board[r][c].isRevealed
-    ) {
-      board[r][c].isRevealed = true;
+					// console.log('---- BOMBA ENCONTRADA ----', bomb.id);
 
-      if (board[r][c].value === 0) {
-        for (let i = -1; i <= 1; i++) {
-          for (let j = -1; j <= 1; j++) {
-            revealCell(r + i, c + j);
-          }
-        }
-      }
-    }
-  };
+					let {x, y} = bomb.id;
+					bomb.displayValue = "*";
 
-  revealCell(row, column);
-};
+					/* Laterais */
+					matriz.incrementDisplay(x, y+1);
+					matriz.incrementDisplay(x, y-1);
+					matriz.incrementDisplay(x+1, y);
+					matriz.incrementDisplay(x-1, y);
 
-const Cell = ({ cell, onClick }) => {
-  const handleClick = () => {
-    onClick(cell);
-  };
+					/* Diagonais */
+					matriz.incrementDisplay(x+1, y+1);
+					matriz.incrementDisplay(x+1, y-1);
+					matriz.incrementDisplay(x-1, y+1);
+					matriz.incrementDisplay(x-1, y-1);
 
-  return (
-    <div
-      className={`cell ${cell.isRevealed ? 'revealed' : ''}`}
-      onClick={handleClick}
-    >
-      {cell.isRevealed ? (cell.value === -1 ? '💣' : cell.value) : ''}
-    </div>
-  );
-};
 
-const CampoMinado = () => {
-  const rows = 10;
-  const columns = 10;
-  const numBombs = 10;
+					// console.log("Before", matriz[x][y]);
+					// matriz.get(x, y).displayValue = 'CARALHO MAANOOO';
+					// console.log("After", matriz[x][y]);
 
-  const [board, setBoard] = useState(generateEmptyBoard(rows, columns));
+				})
+			}
+		)
 
-  const handleCellClick = (row, column) => {
-    if (board[row][column].isRevealed) return;
+		this.state = {
+			squares: arrayBombs
+		}
+	}
 
-    if (board[row][column].value === -1) {
-      // Game over logic
-      alert('Game Over');
-      setBoard(generateEmptyBoard(rows, columns));
-      return;
-    }
+	getGeneratorId(cols){
+		return (function* idMaker(cols){
+			let x = 0;
+			let y = 0;
 
-    board[row][column].isRevealed = true;
+			while (y < cols) {
+				yield {x: x++,y}
 
-    if (board[row][column].value === 0) {
-      revealEmptyCells(board, row, column);
-    }
+				if (x >= cols){
+					x = 0;
+					++y;
+				}
+			}
+		})(cols)
+	}
 
-    setBoard([...board]);
-  };
+	recoverObjectIdByHtmlId(htmlId){
+		let [y, x] = htmlId.split('-');
+		return {y, x};
+	}
 
-  if (board.flat().filter(cell => cell.isRevealed).length === rows * columns - numBombs) {
-    // Game won logic
-    alert('Congratulations! You won the game!');
-    setBoard(generateEmptyBoard(rows, columns));
-  }
+	_callUp({x, y}, cb){
+		// console.log("[_callUp] y =>", y);
+		( --y >= 0) && cb({x, y});
+	}
+	_callDown({x, y}, cb){
+		// console.log("[_callDown] y =>", y);
+		( ++y < this.LADO) && cb({x, y});
+	}
+	_callLeft({x, y}, cb){
+		// console.log("[_callLeft] x =>", x);
+		( --x >= 0) && cb({x, y});
+	}
+	_callRight({x, y}, cb){
+		// console.log("[_callRight] x =>", x);
+		( ++x < this.LADO) && cb({x, y});
+	}
 
-  placeBombs(board, numBombs);
+	_callUpRight({x, y}, cb){
+		// console.log("[_callUpRight] y =>", y);
+		( --y >= 0) && ( ++x < this.LADO) && cb({x, y});
+	}
+	_callUpLeft({x, y}, cb){
+		// console.log("[_callUpLeft] y =>", y);
+		( --y >= 0) && ( --x >= 0) && cb({x, y});
+	}
+	_callDownRight({x, y}, cb){
+		// console.log("[_callDownRight] y =>", y);
+		( ++y < this.LADO) && ( ++x < this.LADO) && cb({x, y});
+	}
+	_callDownLeft({x, y}, cb){
+		// console.log("[_callDownLeft] y =>", y);
+		( ++y < this.LADO) && ( --x >= 0) && cb({x, y});
+	}
 
-  return (
-    <div className="board">
-      {board.map((row, rowIndex) => (
-        <div key={rowIndex} className="row">
-          {row.map((cell, columnIndex) => (
-            <Cell
-              key={columnIndex}
-              cell={cell}
-              onClick={() => handleCellClick(rowIndex, columnIndex)}
-            />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-};
+	callInAllDirections({x, y}, cb){
+		this._callUp({x,y}, cb);
+		this._callDown({x,y}, cb);
+		this._callLeft({x,y}, cb);
+		this._callRight({x,y}, cb);
 
-export default CampoMinado;
+		this._callUpRight({x,y}, cb);
+		this._callUpLeft({x,y}, cb);
+		this._callDownRight({x,y}, cb);
+		this._callDownLeft({x,y}, cb);
+	}
+
+	openNeighborsBecouseItsZero({x, y}){
+		/* Em todas as direções, todos usarão a mesma referência do state.squares */
+		let newSquares = this.state.squares.slice();
+
+		let recourse = ({x, y}) => {
+			// console.info("CALLBACK - ZERADO:", x, y)
+
+			this.callInAllDirections({x, y}, ({x, y}) => {
+				let bomb = newSquares[x][y];
+				// console.log("PossibleBomb vizinha", bomb.id, bomb.isBomb, bomb.displayValue);
+				
+				if (bomb.wasClicked)
+					return;
+				if (bomb.isBomb)
+					return;
+
+				bomb.wasClicked = true;
+				if (bomb.displayValue !== 0)
+					return;
+
+				// console.log("Chamando recursiva para ", x, y)
+				recourse({x,y});				
+			});
+		};
+
+		recourse({x, y})
+	}
+
+	handleClick(e){
+		let squares = this.state.squares.slice();
+		let id = this.recoverObjectIdByHtmlId(e.target.id);
+		let {x, y} = id;
+
+		console.warn(squares[x][y].id);
+		let bomb = squares[x][y];
+		bomb.wasClicked = true;
+
+		if (bomb.isBomb)
+			console.warn("BOOOOMMMM")
+		else if (bomb.displayValue === 0)
+			this.openNeighborsBecouseItsZero(id);
+
+		this.setState({squares});
+
+		setTimeout(() => {
+			if (bomb.isBomb)
+				alert("BOOOOMMMM")
+		},100)
+		// console.log('atualizado');
+	}
+
+	// bomb.wasClicked ? bomb.isBomb : false
+	getSquaresBombs(n){
+		let linguiçona = [];
+
+		this.state.squares.map(line => {
+			line.map(bomb => {
+				linguiçona.push(bomb);
+				return bomb;
+			})
+		})
+
+		let linguiçonaHTML = linguiçona.map(bomb => {
+			let bombId = bomb.id.x + '-' + bomb.id.y;
+			return <PossibleBomb 
+								key={bombId}
+								id={bombId}
+								wasClicked={bomb.wasClicked}
+								isBomb={bomb.isBomb} 
+								clickBomb={e => this.handleClick(e)}>
+									{bomb.wasClicked ? bomb.displayValue : ""}
+						</PossibleBomb>
+		})
+									// {bomb.wasClicked ? bomb.displayValue : ""}
+
+		// console.log('[LINGUIÇONA]', linguiçonaHTML);
+
+		let board = [];
+
+		let rowLength = Math.sqrt(n);
+		let start = 0;
+		let end = rowLength;
+		let times = rowLength;
+		while(times-- > 0){
+			// console.log("[SLICE]", linguiçonaHTML.slice(start, end));
+			board.push(<div key={times} className="board-row">{linguiçonaHTML.slice(start, end)}</div>);
+			start += rowLength;
+			end += rowLength;
+		}
+ 
+		// console.log("[BOARD]", board);
+
+ 		return board;
+	}
+
+
+	render(){
+		let bombs = this.getSquaresBombs(this.MAX_SQUARES);
+		// console.log("Render", bombs)
+		// bombs = ['poha', 'caralho', 'buceta'].map(palavrao => <h1>palavrao</h1>)
+		// console.log(bombs);
+		return (
+			<div className="col-md-10 col-sm-12 col-md-offset-1">
+				<Scores />
+				<Board squares={bombs} />
+			</div>
+		)
+	}
+}
