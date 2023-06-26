@@ -4,7 +4,7 @@ import "./Sobre.css";
 function Sobre() {
   return (
     <div className="sobrePag">
-      <h1>Bem-vindo ao Pogbet: A Arena do Azar!</h1>
+      <h14>Bem-vindo ao Pogbet: A Arena do Azar!</h14>
       <p>
         No Pogbet, adentramos um mundo de excitação e riscos, onde a sorte é a chave para a grandeza. Com uma temática diabólica e uma atmosfera envolvente, oferecemos uma experiência única para os amantes de jogos de azar. Prepare-se para mergulhar em uma jornada inesquecível, onde a adrenalina corre solta.
       </p>
