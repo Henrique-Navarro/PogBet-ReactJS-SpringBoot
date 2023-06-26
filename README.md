@@ -8,27 +8,24 @@
       font-weight: bold;
       margin-bottom: 10px;
     }
-h2 {
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-ul {
-  margin: 0;
-  padding-left: 20px;
-  list-style-type: disc;
-}
-
-li {
-  margin-bottom: 5px;
-}
-
-code {
-  background-color: #f1f1f1;
-  padding: 2px 5px;
-}
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+    code {
+      background-color: #f1f1f1;
+      padding: 2px 5px;
+    }
   </style>
 </head>
 <body>
