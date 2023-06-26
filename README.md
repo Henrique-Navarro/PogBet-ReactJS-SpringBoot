@@ -2,31 +2,6 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <style>
-    h1 {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    h2 {
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-    ul {
-      margin: 0;
-      padding-left: 20px;
-      list-style-type: disc;
-    }
-    li {
-      margin-bottom: 5px;
-    }
-    code {
-      background-color: #f1f1f1;
-      padding: 2px 5px;
-    }
-  </style>
 </head>
 <body>
   <h1>Pogbet - README</h1>
@@ -54,8 +29,7 @@
   </p>
   <ul>
     <li>Registro de usuários: Os usuários podem se cadastrar no site para criar uma conta pessoal e acessar todas as funcionalidades disponíveis.</li>
-    <li>Visualização de eventos esportivos: A Pog Bet exibe uma lista de eventos esportivos disponíveis para apostas, como partidas de futebol, basquete, tênis, entre outros. Os usuários podem visualizar informações detalhadas sobre cada evento, como times/competidores envolvidos, data, horário e odds de apostas.</li>
-    <li>Realização de apostas: Os usuários podem fazer suas apostas em eventos esportivos selecionados. Eles têm a opção de escolher entre diferentes tipos de apostas, como vencedor, placar exato, número de gols/pontos, entre outros.</li>
+    <li>Realização de apostas: Os usuários podem fazer suas apostas nos jogos selecionados. Eles têm a opção de escolher entre diferentes tipos de apostas, como crash, dice e campo minado.</li>
     <li>Gerenciamento de apostas: Os usuários podem acompanhar suas apostas realizadas, verificando o status e os resultados das mesmas.</li>
     <li>Pagamentos e Retiradas: A Pog Bet oferece um sistema de pagamento integrado para que os usuários possam depositar fundos em suas contas e retirar seus ganhos.</li>
     <li>Classificação e Rankings: O site exibe rankings dos usuários com base em seus ganhos e resultados de apostas, criando uma competição amigável entre os participantes.</li>
@@ -67,7 +41,7 @@
   <h2>Build:</h2>
   <p>Para rodar o projeto em React JS, siga as seguintes etapas:</p>
   <ol>
-    <li>Certifique-se de ter o Node.js e o npm (Node Package Manager) instalados em seu ambiente de desenvolvimento.</li>
+    <li>Certifique-se de ter o <a href="https://nodejs.org/en/download">Node.js</a> e o <a href="https://www.npmjs.com/package/download">npm</a> (Node Package Manager) instalados em seu ambiente de desenvolvimento.</li>
     <li>Abra um terminal ou prompt de comando e navegue até o diretório raiz do projeto React JS (frontend).</li>
     <li>Execute o seguinte comando para instalar as dependências do projeto:</li>
   </ol>
@@ -81,7 +55,7 @@
   </p>
   <p>Para rodar o projeto em Spring Boot, siga as seguintes etapas:</p>
   <ol>
-    <li>Certifique-se de ter o Java JDK (Java Development Kit) e o Maven instalados em seu ambiente de desenvolvimento.</li>
+    <li>Certifique-se de ter o <a href="https://adoptium.net/download/">Java JDK</a> (Java Development Kit) e o <a href="https://maven.apache.org/download.cgi">Maven</a> instalados em seu ambiente de desenvolvimento.</li>
     <li>Abra um terminal ou prompt de comando e navegue até o diretório raiz do projeto Spring Boot (backend).</li>
     <li>Execute o seguinte comando para construir o pacote (JAR) do projeto:</li>
   </ol>
