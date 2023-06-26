@@ -7,7 +7,7 @@ export default class Scores extends React.Component {
 
 	render(){
 		return (
-			<h1>Campo Minado</h1>
+			<h7>Campo Minado</h7>
 		)
 	}
 }

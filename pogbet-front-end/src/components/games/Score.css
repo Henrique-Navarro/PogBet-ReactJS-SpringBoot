@@ -1,4 +1,4 @@
-h1{
+h7{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: xx-large;
     font-style: italic;
@@ -6,4 +6,6 @@ h1{
     border-style:dashed;
     border-color: #FFFAEF;
     color: #FFFAEF;
+    display: block;
+    margin-top: 70px;
 }

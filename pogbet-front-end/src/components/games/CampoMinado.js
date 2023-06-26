@@ -12,6 +12,7 @@ export default class CampoMinado extends React.Component {
 		this.MAX_SQUARES = Math.pow(10, 2);
 		this.LADO = Math.sqrt(this.MAX_SQUARES);
 		let idIterator = this.getGeneratorId(this.LADO);
+    
 
 		let arrayBombs = Array(this.LADO)
 			.fill(Array(this.LADO).fill())
@@ -72,8 +73,9 @@ export default class CampoMinado extends React.Component {
 		)
 
 		this.state = {
-			squares: arrayBombs
-		}
+      squares: arrayBombs,
+      aposta: 0
+    };
 	}
 
 	getGeneratorId(cols){
@@ -159,28 +161,35 @@ export default class CampoMinado extends React.Component {
 		recourse({x, y})
 	}
 
-	handleClick(e){
-		let squares = this.state.squares.slice();
-		let id = this.recoverObjectIdByHtmlId(e.target.id);
-		let {x, y} = id;
-
-		console.warn(squares[x][y].id);
-		let bomb = squares[x][y];
-		bomb.wasClicked = true;
-
-		if (bomb.isBomb)
-			console.warn("BOOOOMMMM")
-		else if (bomb.displayValue === 0)
-			this.openNeighborsBecouseItsZero(id);
-
-		this.setState({squares});
-
-		setTimeout(() => {
-			if (bomb.isBomb)
-				alert("BOOOOMMMM")
-		},100)
-	}
-
+  handleClick(e) {
+    let squares = this.state.squares.slice();
+    let id = this.recoverObjectIdByHtmlId(e.target.id);
+    let { x, y } = id;
+  
+    console.warn(squares[x][y].id);
+    let bomb = squares[x][y];
+    bomb.wasClicked = true;
+  
+    if (bomb.isBomb) {
+      console.warn("BOOOOMMMM");
+      this.setState({ aposta: 0 }); // Zera a aposta se houver uma bomba
+    } else if (bomb.displayValue === 0) {
+      this.openNeighborsBecouseItsZero(id);
+    }
+  
+    let quadradosCertos = squares.flat().filter((bomb) => bomb.wasClicked && !bomb.isBomb).length;
+    let resultado = quadradosCertos * 0.5 * this.state.aposta;
+    console.log("Resultado:", resultado);
+  
+    this.setState({ squares });
+  
+    setTimeout(() => {
+      if (bomb.isBomb) {
+        alert("BOOOOMMMM");
+      }
+    }, 100);
+  }
+  
 	getSquaresBombs(n){
 		let aux = [];
 
@@ -221,15 +230,24 @@ export default class CampoMinado extends React.Component {
 	}
 
 
-	render() {
+  render() {
     let bombs = this.getSquaresBombs(this.MAX_SQUARES);
     return (
       <div className="col-md-10 col-sm-12 col-md-offset-1">
         <Scores />
-        <Board squares={bombs}>
-        </Board>
+        <div>
+          <label htmlFor="aposta">Valor da Aposta:</label>
+          <input
+            type="number"
+            id="aposta"
+            value={this.state.aposta}
+            onChange={(e) => this.setState({ aposta: e.target.value })}
+          />
+        </div>
+        <Board squares={bombs} />
       </div>
     );
   }
+  
   
 }
