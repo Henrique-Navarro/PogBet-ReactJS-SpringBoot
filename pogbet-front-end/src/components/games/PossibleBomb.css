@@ -1,7 +1,5 @@
-.col-md-10{
-    text-align: center;
-}
-.logoCav{
+.square {
     width: 40px; /* Defina a largura desejada */
     height: 40px; /* Defina a altura desejada */
-}
+    /* Outros estilos para as peças do tabuleiro */
+  }

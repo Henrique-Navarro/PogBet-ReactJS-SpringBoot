@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Board from './Board';
 import Scores from './Scores';
-
 import PossibleBomb from './PossibleBomb';
+import './CampoMinado.css'
+import Cav from "../../img/LogoCaveira.svg";
 
 export default class CampoMinado extends React.Component {
 	constructor(props){
@@ -12,11 +13,6 @@ export default class CampoMinado extends React.Component {
 		this.LADO = Math.sqrt(this.MAX_SQUARES);
 		let idIterator = this.getGeneratorId(this.LADO);
 
-		/*
-		[[bomb, bomb, bomb],
-		[bomb, bomb, bomb],
-		[bomb, bomb, bomb]]
-		 */
 		let arrayBombs = Array(this.LADO)
 			.fill(Array(this.LADO).fill())
 			.map(line => 
@@ -27,38 +23,16 @@ export default class CampoMinado extends React.Component {
 						wasClicked: false,
 						displayValue: 0,
 						_equals: function(id){
-							// console.log('this', this.id);
 							return this.id.x === id.x && this.id.y === id.y;
 						}
 					})
 				)
 			);
 
-		/* Mock de bombs */
-		// arrayBombs[0][2].isBomb = true;
-		// arrayBombs[1][2].isBomb = true;
-		// arrayBombs[3][2].isBomb = true;
-		// arrayBombs[1][1].isBomb = true;
 
 		arrayBombs.map((line, lineIndex, matriz) => {
-				/** ATENÇÃO!!!!
-				 * Javascript não possui array bidimensiona.
-				 * Para solucionar isso, matriz é um array de arrays,
-				 * onde o primeiro array representam as linhas da minha matriz
-				 * e o segunto array, as "colunas" desta linha, que vem a ser um 
-				 * único objeto.
-				 * No plano carteziano (que é para onde minha função geradora de
-				 * id foi feita), buscamos primeiro a coluna X e depois a linha Y,
-				 * aqui, temos que buscar o contrário, primeiro nossa linha Y e 
-				 * depois nossa coluna X.
-				 *
-				 * Por este motivo, para simular um array bidimensional e lê-lo
-				 * com pares ordenados similares aos do plano carteziano, x e y
-				 * foram invertidos nos parâmetros desta função.
-				 */
 				matriz.incrementDisplay = function(y, x){
 					if (this[x] && this[x][y]){
-						// console.log("Incrementando", this[x][y].id)
 						if (!this[x][y].isBomb){
 							this[x][y].displayValue++;
 						}
@@ -66,16 +40,20 @@ export default class CampoMinado extends React.Component {
 				}
 
 
+
 				line.map((bomb, i) => {
-					// console.log("Bomb =>", bomb);
 
 					if (!bomb.isBomb)
 						return bomb;
-
-					// console.log('---- BOMBA ENCONTRADA ----', bomb.id);
-
 					let {x, y} = bomb.id;
-					bomb.displayValue = "*";
+					bomb.displayValue =  ":(";
+
+          /* <img
+          className="logoCav"
+          src={Cav}
+          alt="imagem do logo caveira"
+          title="Logo caveira"
+        />*/
 
 					/* Laterais */
 					matriz.incrementDisplay(x, y+1);
@@ -88,11 +66,6 @@ export default class CampoMinado extends React.Component {
 					matriz.incrementDisplay(x+1, y-1);
 					matriz.incrementDisplay(x-1, y+1);
 					matriz.incrementDisplay(x-1, y-1);
-
-
-					// console.log("Before", matriz[x][y]);
-					// matriz.get(x, y).displayValue = 'CARALHO MAANOOO';
-					// console.log("After", matriz[x][y]);
 
 				})
 			}
@@ -125,36 +98,28 @@ export default class CampoMinado extends React.Component {
 	}
 
 	_callUp({x, y}, cb){
-		// console.log("[_callUp] y =>", y);
 		( --y >= 0) && cb({x, y});
 	}
 	_callDown({x, y}, cb){
-		// console.log("[_callDown] y =>", y);
 		( ++y < this.LADO) && cb({x, y});
 	}
 	_callLeft({x, y}, cb){
-		// console.log("[_callLeft] x =>", x);
 		( --x >= 0) && cb({x, y});
 	}
 	_callRight({x, y}, cb){
-		// console.log("[_callRight] x =>", x);
 		( ++x < this.LADO) && cb({x, y});
 	}
 
 	_callUpRight({x, y}, cb){
-		// console.log("[_callUpRight] y =>", y);
 		( --y >= 0) && ( ++x < this.LADO) && cb({x, y});
 	}
 	_callUpLeft({x, y}, cb){
-		// console.log("[_callUpLeft] y =>", y);
 		( --y >= 0) && ( --x >= 0) && cb({x, y});
 	}
 	_callDownRight({x, y}, cb){
-		// console.log("[_callDownRight] y =>", y);
 		( ++y < this.LADO) && ( ++x < this.LADO) && cb({x, y});
 	}
 	_callDownLeft({x, y}, cb){
-		// console.log("[_callDownLeft] y =>", y);
 		( ++y < this.LADO) && ( --x >= 0) && cb({x, y});
 	}
 
@@ -171,15 +136,11 @@ export default class CampoMinado extends React.Component {
 	}
 
 	openNeighborsBecouseItsZero({x, y}){
-		/* Em todas as direções, todos usarão a mesma referência do state.squares */
 		let newSquares = this.state.squares.slice();
 
 		let recourse = ({x, y}) => {
-			// console.info("CALLBACK - ZERADO:", x, y)
-
 			this.callInAllDirections({x, y}, ({x, y}) => {
 				let bomb = newSquares[x][y];
-				// console.log("PossibleBomb vizinha", bomb.id, bomb.isBomb, bomb.displayValue);
 				
 				if (bomb.wasClicked)
 					return;
@@ -190,7 +151,7 @@ export default class CampoMinado extends React.Component {
 				if (bomb.displayValue !== 0)
 					return;
 
-				// console.log("Chamando recursiva para ", x, y)
+
 				recourse({x,y});				
 			});
 		};
@@ -218,21 +179,19 @@ export default class CampoMinado extends React.Component {
 			if (bomb.isBomb)
 				alert("BOOOOMMMM")
 		},100)
-		// console.log('atualizado');
 	}
 
-	// bomb.wasClicked ? bomb.isBomb : false
 	getSquaresBombs(n){
-		let linguiçona = [];
+		let aux = [];
 
 		this.state.squares.map(line => {
 			line.map(bomb => {
-				linguiçona.push(bomb);
+				aux.push(bomb);
 				return bomb;
 			})
 		})
 
-		let linguiçonaHTML = linguiçona.map(bomb => {
+		let auxHTML = aux.map(bomb => {
 			let bombId = bomb.id.x + '-' + bomb.id.y;
 			return <PossibleBomb 
 								key={bombId}
@@ -243,9 +202,7 @@ export default class CampoMinado extends React.Component {
 									{bomb.wasClicked ? bomb.displayValue : ""}
 						</PossibleBomb>
 		})
-									// {bomb.wasClicked ? bomb.displayValue : ""}
-
-		// console.log('[LINGUIÇONA]', linguiçonaHTML);
+							
 
 		let board = [];
 
@@ -254,28 +211,25 @@ export default class CampoMinado extends React.Component {
 		let end = rowLength;
 		let times = rowLength;
 		while(times-- > 0){
-			// console.log("[SLICE]", linguiçonaHTML.slice(start, end));
-			board.push(<div key={times} className="board-row">{linguiçonaHTML.slice(start, end)}</div>);
+			board.push(<div key={times} className="board-row">{auxHTML.slice(start, end)}</div>);
 			start += rowLength;
 			end += rowLength;
 		}
  
-		// console.log("[BOARD]", board);
 
  		return board;
 	}
 
 
-	render(){
-		let bombs = this.getSquaresBombs(this.MAX_SQUARES);
-		// console.log("Render", bombs)
-		// bombs = ['poha', 'caralho', 'buceta'].map(palavrao => <h1>palavrao</h1>)
-		// console.log(bombs);
-		return (
-			<div className="col-md-10 col-sm-12 col-md-offset-1">
-				<Scores />
-				<Board squares={bombs} />
-			</div>
-		)
-	}
+	render() {
+    let bombs = this.getSquaresBombs(this.MAX_SQUARES);
+    return (
+      <div className="col-md-10 col-sm-12 col-md-offset-1">
+        <Scores />
+        <Board squares={bombs}>
+        </Board>
+      </div>
+    );
+  }
+  
 }
