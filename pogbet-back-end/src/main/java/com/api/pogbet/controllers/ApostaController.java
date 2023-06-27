@@ -2,6 +2,7 @@ package com.api.pogbet.controllers;
 
 import com.api.pogbet.model.Aposta;
 import com.api.pogbet.services.ApostaService;
+import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("aposta")
 @RequiredArgsConstructor
+@Table(name = "[aposta]")
 public class ApostaController {
     private final ApostaService apostaService;
 

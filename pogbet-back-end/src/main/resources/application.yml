@@ -1,13 +1,18 @@
 server:
-  error:
-    include-stacktrace: never
   port: 8080
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/pogbet_db?useSSL=false
-    username: root
-    password: 12345
+    url: jdbc:sqlserver://mysqlserverpogbet.database.windows.net:1433;database=pogbet;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: pogbet@mysqlserverpogbet
+    password: banco-pb-1A
   jpa:
+    show-sql: "true"
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
+
+
+
+
+

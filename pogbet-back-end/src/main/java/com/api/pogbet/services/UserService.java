@@ -3,11 +3,13 @@ package com.api.pogbet.services;
 import com.api.pogbet.model.Aposta;
 import com.api.pogbet.model.User;
 import com.api.pogbet.repository.UserRepository;
+import jakarta.persistence.Table;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Table(name = "[user]")
 public class UserService {
     //CLASSE RESPONSÁVEL PELAS REGRAS DE NEGÓCIO
     private final UserRepository userRepository;
