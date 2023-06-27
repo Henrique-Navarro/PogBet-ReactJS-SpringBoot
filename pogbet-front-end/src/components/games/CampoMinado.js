@@ -80,6 +80,7 @@ export default class CampoMinado extends React.Component {
       ganho:0
     };
 	}
+
   pararAposta() {
     const categoria = "Campo Minado";
     const data = "28/06/2023";
@@ -112,6 +113,7 @@ export default class CampoMinado extends React.Component {
         console.error("Erro ao adicionar a aposta:", err);
       });
   };
+
 
 	getGeneratorId(cols){
 		return (function* idMaker(cols){
@@ -297,7 +299,8 @@ export default class CampoMinado extends React.Component {
           <p>Ganho: R${ganho}</p>
         </div>
         <Board squares={bombs} resetBoard={this.resetBoard} />
-        <button className='botaoCam' onClick={this.pararAposta}>Parar</button>
+        <button className='botaoCam' onClick={() => { this.pararAposta(); window.location.href = window.location.href; }}>Parar</button>
+
 
       </div>
     );
