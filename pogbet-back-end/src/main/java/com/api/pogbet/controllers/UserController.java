@@ -3,6 +3,7 @@ package com.api.pogbet.controllers;
 import com.api.pogbet.model.Aposta;
 import com.api.pogbet.model.User;
 import com.api.pogbet.services.UserService;
+import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 
-
+@Table(name = "[user]")
 public class UserController {
     //CLASSE QUE CONTROLA AS ROTAS DAS APLICAÇÃO
     private final UserService userService;

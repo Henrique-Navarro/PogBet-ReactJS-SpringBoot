@@ -1,9 +1,6 @@
 package com.api.pogbet.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -18,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Builder
+@Table(name = "[aposta]")
 public class Aposta {
 
     @Id

@@ -112,6 +112,7 @@ export default class CampoMinado extends React.Component {
         console.error("Erro ao adicionar a aposta:", err);
       });
   };
+
 	getGeneratorId(cols){
 		return (function* idMaker(cols){
 			let x = 0;
