@@ -3,7 +3,7 @@ import { BsPencil, BsFillTrashFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 let vitoria = "";
 
-function ApostaCard({ id, categoria,  data, ganhou,valor, handleRemove }) {
+function ApostaCard({ id, categoria, data, ganhou, valor, handleRemove }) {
   const remove = (e) => {
     e.preventDefault();
     handleRemove(id);
@@ -15,7 +15,7 @@ function ApostaCard({ id, categoria,  data, ganhou,valor, handleRemove }) {
         <h4>{categoria}</h4>
         <p className={styles.category_text}>
           <span className={`${styles[vitoria]}`}></span>
-          {valor}
+          Valor: R${valor},00
         </p>
         <p className={styles.category_text}>
           <span className={`${styles[vitoria]}`}></span>

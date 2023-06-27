@@ -5,3 +5,25 @@
     width: 40px; /* Defina a largura desejada */
     height: 40px; /* Defina a altura desejada */
 }
+
+.apostaCam{
+    margin-top: 40px;
+    font-size:x-large;
+}
+
+.ganhoCam{
+    font-size: larger;
+}
+
+.apostaIn{
+    border-radius: 5px;
+}
+
+.botaoCam{
+  background-color: darkred;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}

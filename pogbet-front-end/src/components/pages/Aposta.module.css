@@ -26,7 +26,7 @@
 
 .details_container,
 .service_form_container {
-    border-bottom: 1px solid #7a7a7a;
+    border-bottom: 1px solid white;
     padding-bottom: 1.2em;
     margin-bottom: 1.2em;
     display: flex;
@@ -35,8 +35,8 @@
 }
 
 .btn {
-    background-color: #222;
-    color: #fff;
+    background-color: darkgoldenrod;
+    color: black;
     padding: 0.5em 1em;
     text-decoration: none;
     transition: 0.5s;
@@ -46,7 +46,7 @@
 }
 
 .btn:hover {
-    color: #ffbb33;
+    color: white;
 }
 
 .project_info {
