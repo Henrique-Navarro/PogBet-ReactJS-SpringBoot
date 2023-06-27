@@ -3,17 +3,19 @@ import Board from './Board';
 import Scores from './Scores';
 import PossibleBomb from './PossibleBomb';
 import './CampoMinado.css'
-import Cav from "../../img/LogoCaveira.svg";
-
+import { useNavigate } from "react-router-dom";
+let auxValor, auxGanhou;
 export default class CampoMinado extends React.Component {
+  
 	constructor(props){
 		super(props);
-
+    //const navigate = useNavigate();
+    this.pararAposta = this.pararAposta.bind(this); 
 		this.MAX_SQUARES = Math.pow(10, 2);
 		this.LADO = Math.sqrt(this.MAX_SQUARES);
 		let idIterator = this.getGeneratorId(this.LADO);
+   
     
-
 		let arrayBombs = Array(this.LADO)
 			.fill(Array(this.LADO).fill())
 			.map(line => 
@@ -47,7 +49,7 @@ export default class CampoMinado extends React.Component {
 					if (!bomb.isBomb)
 						return bomb;
 					let {x, y} = bomb.id;
-					bomb.displayValue =  ":(";
+					bomb.displayValue =  "F";
 
           /* <img
           className="logoCav"
@@ -74,10 +76,42 @@ export default class CampoMinado extends React.Component {
 
 		this.state = {
       squares: arrayBombs,
-      aposta: 0
+      aposta: 0,
+      ganho:0
     };
 	}
+  pararAposta() {
+    const categoria = "Campo Minado";
+    const data = "28/06/2023";
+    const ganhou = auxGanhou;
+    const valor = auxValor;
+    const userID = 2;
 
+    const aposta = {
+      categoria,
+      valor,
+      ganhou,
+      data,
+      userID
+    };
+
+    console.log(aposta);
+
+    fetch("http://localhost:8080/aposta/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(aposta),
+    })
+      .then((resp) => resp.json())
+      .then(() => {
+        console.log("Aposta adicionada com sucesso!");
+      })
+      .catch((err) => {
+        console.error("Erro ao adicionar a aposta:", err);
+      });
+  };
 	getGeneratorId(cols){
 		return (function* idMaker(cols){
 			let x = 0;
@@ -165,27 +199,38 @@ export default class CampoMinado extends React.Component {
     let squares = this.state.squares.slice();
     let id = this.recoverObjectIdByHtmlId(e.target.id);
     let { x, y } = id;
-  
+
     console.warn(squares[x][y].id);
     let bomb = squares[x][y];
     bomb.wasClicked = true;
-  
-    if (bomb.isBomb) {
-      console.warn("BOOOOMMMM");
-      this.setState({ aposta: 0 }); // Zera a aposta se houver uma bomba
-    } else if (bomb.displayValue === 0) {
-      this.openNeighborsBecouseItsZero(id);
-    }
-  
     let quadradosCertos = squares.flat().filter((bomb) => bomb.wasClicked && !bomb.isBomb).length;
-    let resultado = quadradosCertos * 0.5 * this.state.aposta;
-    console.log("Resultado:", resultado);
+    let ganho = (this.state.aposta * Math.pow(1.01, quadradosCertos)).toFixed(2); // Atualiza o valor do ganho com duas casas decimais
+
+    if (bomb.isBomb) {
+     
+     
+      this.setState({ aposta: 0, ganho: 0 }); // Zera a aposta e o ganho se houver uma bomba
+        auxGanhou = false;
+        auxValor = 0 ;
+        this.pararAposta()
+        // Reinicia a página 
+      
+        window.location.reload();
+    } 
+    
+    else if (bomb.displayValue === 0) {
+      this.openNeighborsBecouseItsZero(id);
+      auxGanhou = true;
+      auxValor = ganho;
+    }
+
   
-    this.setState({ squares });
-  
+
+    this.setState({ squares, ganho });
+
     setTimeout(() => {
       if (bomb.isBomb) {
-        alert("BOOOOMMMM");
+        alert("BOOOOMMMM VOCE PERDEU !!!");
       }
     }, 100);
   }
@@ -232,22 +277,28 @@ export default class CampoMinado extends React.Component {
 
   render() {
     let bombs = this.getSquaresBombs(this.MAX_SQUARES);
+    let ganho = this.state.ganho;
+
+    
     return (
       <div className="col-md-10 col-sm-12 col-md-offset-1">
         <Scores />
         <div>
-          <label htmlFor="aposta">Valor da Aposta:</label>
-          <input
+          <label className="apostaCam">Valor da Aposta</label>
+          <input className='apostaIn'
             type="number"
             id="aposta"
             value={this.state.aposta}
             onChange={(e) => this.setState({ aposta: e.target.value })}
           />
         </div>
-        <Board squares={bombs} />
+        <div className='ganhoCam'>
+          <p>Ganho: R${ganho}</p>
+        </div>
+        <Board squares={bombs} resetBoard={this.resetBoard} />
+        <button className='botaoCam' onClick={this.pararAposta}>Parar</button>
+
       </div>
     );
   }
-  
-  
 }
