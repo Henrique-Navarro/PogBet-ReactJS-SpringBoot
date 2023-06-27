@@ -18,5 +18,9 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: Configure Maven settings.xml
+      run: |
+        mkdir -p $HOME/.m2
+        echo "<settings><servers><server><id>mysqlserverpogbet.database.windows.net</id><username>pogbet</username><password>banco-pb-1A</password></server></servers></settings>" > $HOME/.m2/settings.xml
     - name: Build with Maven
       run: mvn -B package --file ${{ github.workspace }}/pogbet-back-end/pom.xml
