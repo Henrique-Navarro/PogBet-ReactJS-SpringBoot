@@ -15,7 +15,7 @@ function ApostaCard({ id, categoria, data, ganhou, valor, handleRemove }) {
         <h4>{categoria}</h4>
         <p className={styles.category_text}>
           <span className={`${styles[vitoria]}`}></span>
-          Valor: R${valor},00
+          Valor: R${valor}
         </p>
         <p className={styles.category_text}>
           <span className={`${styles[vitoria]}`}></span>
