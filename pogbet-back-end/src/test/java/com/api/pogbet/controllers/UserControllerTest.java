@@ -1,6 +1,5 @@
 package com.api.pogbet.controllers;
 
-
 import com.api.pogbet.model.User;
 import com.api.pogbet.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,13 +7,17 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 class UserControllerTest {
+
+    private MockMvc mockMvc;
 
     @Mock
     private UserService userService;
@@ -25,48 +28,58 @@ class UserControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
     @Test
-    void save_shouldReturnCreatedStatus() {
-        // Arrange
+    void save_shouldReturnOk() throws Exception {
         User user = new User();
-        when(userService.save(user)).thenReturn(new User());
+        user.setName("John");
+        user.setEmail("john@example.com");
+        user.setSenha("password");
+        user.setDataNascimento("1990-01-01");
+        user.setSaldo(100.0);
+        user.setCpf("12345678900");
 
-        // Act
-        ResponseEntity<String> response = userController.save(user);
+        when(userService.save(any(User.class))).thenReturn(user);
 
-        // Assert
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("Usuário criado com Sucesso!\n", response.getBody());
-        verify(userService, times(1)).save(user);
+        mockMvc.perform(post("/novoUsuario")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"name\": \"John\", \"email\": \"john@example.com\", \"senha\": \"password\", \"dataNascimento\": \"1990-01-01\", \"saldo\": 100.0, \"cpf\": \"12345678900\" }"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Usuário criado com Sucesso!\n"));
+
+        verify(userService, times(1)).save(any(User.class));
     }
 
     @Test
-    void replace_shouldReturnOkStatus() {
-        // Arrange
+    void replace_shouldReturnOk() throws Exception {
         User user = new User();
+        user.setId(1L);
+        user.setName("John");
+        user.setEmail("john@example.com");
+        user.setSenha("password");
+        user.setDataNascimento("1990-01-01");
+        user.setSaldo(100.0);
+        user.setCpf("12345678900");
 
-        // Act
-        ResponseEntity<String> response = userController.replace(user);
+        mockMvc.perform(put("/attUser")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"id\": 1, \"name\": \"John\", \"email\": \"john@example.com\", \"senha\": \"password\", \"dataNascimento\": \"1990-01-01\", \"saldo\": 100.0, \"cpf\": \"12345678900\" }"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Usuário atualizado com Sucesso!\n"));
 
-        // Assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("Usuário atualizado com Sucesso!\n", response.getBody());
-        verify(userService, times(1)).replace(user);
+        verify(userService, times(1)).replace(any(User.class));
     }
 
     @Test
-    void delete_shouldReturnOkStatus() {
-        // Arrange
-        Long id = 1L;
+    void delete_shouldReturnOk() throws Exception {
+        Long userId = 1L;
 
-        // Act
-        ResponseEntity<String> response = userController.delete(id);
+        mockMvc.perform(delete("/{id}", userId))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Usuário deletado com Sucesso!\n"));
 
-        // Assert
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("Usuário deletado com Sucesso!\n", response.getBody());
-        verify(userService, times(1)).delete(id);
+        verify(userService, times(1)).delete(userId);
     }
 }
